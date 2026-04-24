@@ -10,17 +10,17 @@ export function seedDatabase(db: Database.Database): void {
     ) VALUES (1, ?, 'SARL', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `);
   insertConfig.run(
-    'ARTISAN BTP SARL',
-    '12345678901234',
-    'FR12345678901',
-    'RCS Rennes B 123 456 789',
-    '15 Rue du Bâtiment',
-    '35000',
-    'Rennes',
-    '02 99 00 00 00',
+    'APM35',
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
     'sarlapm35@gmail.com',
     'Paiement à réception de facture. Pénalités de retard : 3 fois le taux légal.',
-    'SARL au capital de 10 000€ - SIRET 12345678901234 - TVA FR12345678901',
+    null,
   );
 
   db.prepare(`

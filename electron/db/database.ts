@@ -66,4 +66,12 @@ function runMigrations(db: Database.Database): void {
     `).run(DEFAULT_RELANCE_N1, DEFAULT_RELANCE_N2, DEFAULT_RELANCE_N3);
     console.log('[migration] Relance templates upgraded to v2 (pro tone)');
   }
+
+  // One-shot bump: rename leftover demo raison_sociale to "APM35" so existing
+  // installs don't show "ARTISAN BTP SARL" or the bare "Mon entreprise" placeholder.
+  const cfgNow = db.prepare('SELECT raison_sociale FROM configuration WHERE id = 1').get() as { raison_sociale: string | null } | undefined;
+  if (cfgNow?.raison_sociale === 'ARTISAN BTP SARL' || cfgNow?.raison_sociale === 'Mon entreprise') {
+    db.prepare('UPDATE configuration SET raison_sociale = ?, updated_at = CURRENT_TIMESTAMP WHERE id = 1').run('APM35');
+    console.log('[migration] Default raison_sociale renamed to "APM35"');
+  }
 }
