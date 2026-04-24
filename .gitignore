@@ -40,3 +40,4 @@ Thumbs.db
 # Local database / user data (should never be checked in)
 *.sqlite
 *.sqlite-*
+*.tsbuildinfo
